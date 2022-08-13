@@ -12,10 +12,10 @@
  *
  *************************************************************************/
 
+import javax.sound.sampled.*;
 import java.applet.*;
 import java.io.*;
 import java.net.*;
-import javax.sound.sampled.*;
 
 /**
  *  <i>Standard audio</i>. This class provides a basic capability for
