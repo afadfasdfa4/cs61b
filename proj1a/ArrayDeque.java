@@ -9,8 +9,8 @@ public class ArrayDeque<T>{
         if(size+1>=arr.length){
             arr = resize_more(arr,size);
         }
-        for(int i=0;i<size;i++){
-            arr[i+1] = arr[i];
+        for(int i=size;i>=1;i--){
+            arr[i] = arr[i-1];
         }
         arr[0] = item;
         size++;
