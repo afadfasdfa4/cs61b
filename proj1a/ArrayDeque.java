@@ -35,6 +35,7 @@ public class ArrayDeque<T>{
         if(index<0) index += arr.length;
         arr[index] = item;
         size++;
+        start = index;
     }
 
     public void addLast(T item){
@@ -53,6 +54,7 @@ public class ArrayDeque<T>{
     }
 
     public int size(){
+
         return size;
     }
 
@@ -76,7 +78,7 @@ public class ArrayDeque<T>{
             arr = resize_less(arr,start,size);
         }
         T a = arr[start];
-        start++;
+        start = (start+1)%arr.length;
         size--;
         return a;
 
