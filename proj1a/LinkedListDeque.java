@@ -1,7 +1,7 @@
 import jdk.jshell.spi.SPIResolutionException;
 
 public class LinkedListDeque<T> {
-    public static class LinkedNode<T> {
+    private static class LinkedNode<T> {
         private T item;
         private LinkedNode next;
         private LinkedNode pre;
@@ -60,12 +60,14 @@ public class LinkedListDeque<T> {
     public T removeFirst(){
         if(size==0) return null;
         LinkedNode a = sentinel.next;
-        sentinel.next = sentinel.next.next;
+        sentinel.next = a.next;
         if(sentinel.next!=null) sentinel.next.pre = sentinel;
         size--;
+        if(size==0) last = sentinel;
         return (T)a.item;
     }
     public T removeLast(){
+        if(size==0) return null;
         LinkedNode a = last;
         last = last.pre;
         last.next = null;
@@ -88,7 +90,7 @@ public class LinkedListDeque<T> {
         else return (T)a.item;
 
     }
-    public LinkedNode getRecursive_help(int index){
+    private LinkedNode getRecursive_help(int index){
         if(index==0){
             if(size==0) return null;
             return sentinel.next;

@@ -15,14 +15,14 @@ public class ArrayDeque<T>{
         arr[0] = item;
         size++;
     }
-    public T[] resize_more(T[] arr,int size){
+    private T[] resize_more(T[] arr,int size){
         T[] a = (T[]) new Object[(int)(arr.length*1.5)];
         for(int i=0;i<size;i++){
             a[i] = arr[i];
         }
         return a;
     }
-    public T[] resize_less(T[] arr,int size){
+    private T[] resize_less(T[] arr,int size){
         T[] a = (T[]) new Object[(int)(arr.length*0.5)];
         for(int i=0;i<size;i++){
             a[i] = arr[i];
