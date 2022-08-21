@@ -23,7 +23,7 @@ public class ArrayDeque<T>{
         return a;
     }
     private T[] resize_less(T[] arr,int size){
-        T[] a = (T[]) new Object[(int)(arr.length*0.5)];
+        T[] a = (T[]) new Object[(int)(arr.length/2)];
         for(int i=0;i<size;i++){
             a[i] = arr[i];
         }
@@ -51,7 +51,7 @@ public class ArrayDeque<T>{
     public T removeLast(){
         if(size==0) return null;
         if(arr.length>=16&&(size-1)<=(arr.length/4)){
-            resize_less(arr,size);
+            arr = resize_less(arr,size);
         }
         T a = arr[size-1];
         size--;
@@ -60,7 +60,7 @@ public class ArrayDeque<T>{
     public T removeFirst(){
         if(size==0) return null;
         if(arr.length>=16&&(size-1)<=(arr.length/4)){
-            resize_less(arr,size);
+            arr = resize_less(arr,size);
         }
         T a = arr[0];
         for(int i=1;i<size;i++){
