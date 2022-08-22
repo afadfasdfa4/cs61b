@@ -14,7 +14,7 @@ public class ArrayDeque<T>{
             int index = (start+i)%arr.length;
             a[i] = arr[index];
         }
-        start = 0;
+        this.start = 0;
         return a;
     }
     private T[] resize_less(T[] arr,int start,int size){
@@ -23,7 +23,7 @@ public class ArrayDeque<T>{
             int index = (start+i)%arr.length;
             a[i] = arr[index];
         }
-        start = 0;
+        this.start = 0;
         return a;
     }
 
@@ -31,12 +31,23 @@ public class ArrayDeque<T>{
         if(size+1>=arr.length){
             arr = resize_more(arr,start,size);
         }
-        int index = start - 1;
+        int index;
+        if(size==0){
+            index = start;
+        }else {
+            index = start - 1;
+        }
         if(index<0) index += arr.length;
         arr[index] = item;
         size++;
         start = index;
     }
+    //测试用方法
+    /*public void show(){
+        for(int i=0;i< arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }*/
 
     public void addLast(T item){
         if(size+1>=arr.length){
