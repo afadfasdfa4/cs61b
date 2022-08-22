@@ -1,3 +1,8 @@
+/**
+ *   注意有重名情况时记得用this
+ *   循环数组的使用
+ *
+ */
 public class ArrayDeque<T>{
     private T[] arr;
     private int start;
