@@ -6,8 +6,8 @@ import byog.TileEngine.TETile;
 public class Game {
     TERenderer ter = new TERenderer();
     /* Feel free to change the width and height. */
-    public static final int WIDTH = 80;
-    public static final int HEIGHT = 30;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 300;
 
     /**
      * Method used for playing a fresh game. The game should start from the main menu.
