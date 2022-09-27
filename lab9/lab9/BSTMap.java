@@ -1,7 +1,6 @@
 package lab9;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Implementation of interface Map61B with BST as core data structure.
@@ -44,7 +43,17 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      *  or null if this map contains no mapping for the key.
      */
     private V getHelper(K key, Node p) {
-        throw new UnsupportedOperationException();
+        if(p==null) return null;
+
+        int a = p.key.compareTo(key);
+        if(a==0) return p.value;
+        else if(a>0){
+            return getHelper(key,p.left);
+        }else {
+            return getHelper(key,p.right);
+        }
+
+        //throw new UnsupportedOperationException();
     }
 
     /** Returns the value to which the specified key is mapped, or null if this
@@ -52,14 +61,47 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        return getHelper(key,root);
+        //throw new UnsupportedOperationException();
     }
 
     /** Returns a BSTMap rooted in p with (KEY, VALUE) added as a key-value mapping.
       * Or if p is null, it returns a one node BSTMap containing (KEY, VALUE).
      */
     private Node putHelper(K key, V value, Node p) {
-        throw new UnsupportedOperationException();
+        if(p==null){
+            BSTMap bstMap = new BSTMap();
+            bstMap.root = new Node(key,value);
+            return bstMap.root;
+        }
+        Node cur = p;
+        while (cur!=null){
+            int n = cur.key.compareTo(key);
+            if(n==0){
+                cur.value = value;
+                break;
+            }else if(n>0){
+                if(cur.left==null){
+                    cur.left = new Node(key,value);
+                    break;
+                }else {
+                    cur = cur.left;
+                }
+            }else {
+                if(cur.right==null){
+                    cur.right = new Node(key,value);
+                    break;
+                }else {
+                    cur = cur.right;
+                }
+            }
+        }
+
+        return p;
+
+
+
+        //throw new UnsupportedOperationException();
     }
 
     /** Inserts the key KEY
@@ -67,13 +109,17 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      */
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+        root = putHelper(key,value,root);
+        size++;
+
+        //throw new UnsupportedOperationException();
     }
 
     /* Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
+        //throw new UnsupportedOperationException();
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
@@ -81,7 +127,19 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     /* Returns a Set view of the keys contained in this map. */
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        HashSet<K> hashSet = new HashSet<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            Node cur = queue.poll();
+            if(cur.left!=null) queue.add(cur.left);
+            if(cur.right!=null) queue.add(cur.right);
+            hashSet.add(cur.key);
+        }
+        return hashSet;
+
+
+        //throw new UnsupportedOperationException();
     }
 
     /** Removes KEY from the tree if present
@@ -104,6 +162,23 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     @Override
     public Iterator<K> iterator() {
-        throw new UnsupportedOperationException();
+        Iterator<K> iterator = new Iterator<K>() {
+
+            HashSet<K> hashSet = (HashSet<K>) keySet();
+            Iterator i = hashSet.iterator();
+
+            @Override
+            public boolean hasNext() {
+                return i.hasNext();
+            }
+
+            @Override
+            public K next() {
+                return (K) i.next();
+            }
+        };
+
+        return iterator;
+        }
     }
-}
+
